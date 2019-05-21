@@ -34,11 +34,18 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public List<Student> findStudentByNameLike(String name)
-    {
-        List<Student> list = new ArrayList<>();
-        studrepos.findByStudnameContainingIgnoreCase(name).iterator().forEachRemaining(list::add);
-        return list;
+    public List<Student> findStudentByNameLike(String name, Pageable pageable) {
+
+        List<Student> students = studrepos.findByStudnameContainingIgnoreCase(name, pageable);
+
+        if(students.size() == 0) {
+
+            throw new EntityNotFoundException("No students exist containing that name");
+            
+        }
+
+        return students;
+
     }
 
     @Override

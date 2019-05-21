@@ -54,13 +54,13 @@ public class StudentController
     }
 
 
-    @GetMapping(value = "/student/namelike/{name}",
-                produces = {"application/json"})
-    public ResponseEntity<?> getStudentByNameContaining(
-            @PathVariable String name)
-    {
-        List<Student> myStudents = studentService.findStudentByNameLike(name);
+    @GetMapping(value = "/student/namelike/{name}", produces = {"application/json"})
+    public ResponseEntity<?> getStudentByNameContaining(@PageableDefault(page = 0, size = 2) Pageable pageable, @PathVariable String name) {
+
+        List<Student> myStudents = studentService.findStudentByNameLike(name, pageable);
+
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
+
     }
 
 
