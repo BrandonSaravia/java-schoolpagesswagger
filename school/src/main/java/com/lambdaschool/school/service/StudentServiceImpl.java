@@ -1,9 +1,9 @@
 package com.lambdaschool.school.service;
 
-import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.model.Student;
 import com.lambdaschool.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +18,10 @@ public class StudentServiceImpl implements StudentService
     private StudentRepository studrepos;
 
     @Override
-    public List<Student> findAll()
+    public List<Student> findAll(Pageable pageable)
     {
         List<Student> list = new ArrayList<>();
-        studrepos.findAll().iterator().forEachRemaining(list::add);
+        studrepos.findAll(pageable).iterator().forEachRemaining(list::add);
         return list;
     }
 
@@ -33,11 +33,18 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
-    public List<Student> findStudentByNameLike(String name)
-    {
-        List<Student> list = new ArrayList<>();
-        studrepos.findByStudnameContainingIgnoreCase(name).iterator().forEachRemaining(list::add);
-        return list;
+    public List<Student> findStudentByNameLike(String name, Pageable pageable) {
+
+        List<Student> students = studrepos.findByStudnameContainingIgnoreCase(name, pageable);
+
+        if(students.size() == 0) {
+
+            throw new EntityNotFoundException("No students exist containing that name");
+
+        }
+
+        return students;
+
     }
 
     @Override
@@ -76,4 +83,13 @@ public class StudentServiceImpl implements StudentService
 
         return studrepos.save(currentStudent);
     }
+
+//    @Override
+//    public void addStudentToCourse(long courseid, long studentid) {
+//
+//        studentAddedToCourse = studrepos.addStudentwithCourse(courseid, studentid);
+//
+//        return studrepos.save(studentAddedToCourse);
+//
+//    }
 }
