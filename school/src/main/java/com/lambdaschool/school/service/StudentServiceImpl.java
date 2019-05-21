@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService
         if(students.size() == 0) {
 
             throw new EntityNotFoundException("No students exist containing that name");
-            
+
         }
 
         return students;

@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface StudentRepository extends PagingAndSortingRepository<Student, Long>
+public interface StudentRepository extends PagingAndSortingRepository<Student, Long>, CrudRepository<Student, Long>
 {
     List<Student> findByStudnameContainingIgnoreCase(String name, Pageable pageable);
 }
