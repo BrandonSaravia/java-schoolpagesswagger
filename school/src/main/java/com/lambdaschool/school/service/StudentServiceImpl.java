@@ -1,6 +1,5 @@
 package com.lambdaschool.school.service;
 
-import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.model.Student;
 import com.lambdaschool.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,4 +83,13 @@ public class StudentServiceImpl implements StudentService
 
         return studrepos.save(currentStudent);
     }
+
+//    @Override
+//    public void addStudentToCourse(long courseid, long studentid) {
+//
+//        studentAddedToCourse = studrepos.addStudentwithCourse(courseid, studentid);
+//
+//        return studrepos.save(studentAddedToCourse);
+//
+//    }
 }

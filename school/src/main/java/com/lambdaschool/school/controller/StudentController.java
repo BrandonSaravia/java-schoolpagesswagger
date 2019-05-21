@@ -126,4 +126,12 @@ public class StudentController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    @GetMapping(value = "/addStudent/{studentid}/toCourse/{courseid}", consumes = {"application/json"}, produces = {"application/json"})
+//    public ResponseEntity<?> addStudentToCorse(@PathVariable long studentid, @PathVariable long courseid) {
+//
+//        studentService.addStudentToCourse(studentid, courseid);
+//
+//        return new ResponseEntity<>(HttpStatus.OK)
+//    }
+
 }
